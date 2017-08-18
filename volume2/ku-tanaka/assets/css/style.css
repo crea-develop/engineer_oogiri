@@ -1,0 +1,243 @@
+@charset ' UTF-8';
+
+body{
+	margin: 0;
+	padding: 0;
+}
+.btn_box{
+	box-sizing: border-box;
+	width:1000px;
+	height: 2000px;
+	position: relative;
+	border: 1px solid #000;
+	margin: 200px auto;
+}
+.monkey{
+	text-align: center;
+	cursor: pointer;
+	box-sizing: border-box;
+	border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	-o-border-radius: 50%;
+	-ms-border-radius: 50%;
+	color: chocolate;
+	background-color: chocolate;
+	display: block;
+	text-decoration: none;
+	width: 150px;
+	height: 150px;
+	position: absolute;
+	top: -151px;
+	left: 425px;
+	-webkit-transition: 1s;
+	transition: 1s;
+}
+.monkey .face{
+	display: block;
+	width: 100px;
+	height: 120px;
+	background-color: #FFEBCD;
+	position: absolute;
+	bottom: 0;
+	right: 25px;
+	border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	-o-border-radius: 50%;
+	-ms-border-radius: 50%;
+	-webkit-transition: 1s;
+	transition: 1s;
+}
+.monkey .face:before,
+.monkey .face:after{
+	content: "";
+	display: block;
+	width: 50px;
+	height: 50px;
+	background-color: chocolate;
+	border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	-o-border-radius: 50%;
+	-ms-border-radius: 50%;
+	position: absolute;
+	top: 27px;
+	-webkit-transition: 1s;
+	transition: 1s;
+}
+.monkey .face:before{
+	right: -50px;
+}
+.monkey .face:after{
+	left: -50px;
+}
+.monkey:hover{
+	opacity: 0.8;
+	-webkit-transition: 0.5s;
+	transition: 0.5s;
+}
+
+.monkey a{
+	display: block;
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	-o-border-radius: 50%;
+	-ms-border-radius: 50%;
+	background-color: red;
+}
+.monkey a:hover{
+	opacity: 0.8;
+	-webkit-transition: 0.5s;
+	transition: 0.5s;
+}
+a > .face:before
+a > .face:after{
+	background-color: red !important;
+	-webkit-transition: 0;
+	transition: 0;
+}
+
+.monkey.red{
+	background-color: pink;
+	color: pink;
+	top: 1850px;
+	left: 0;
+	-webkit-transition: 0.2s;
+	transition: 0.2s;
+}
+.monkey.red .face:before,
+.monkey.red .face:after{
+	background-color: pink;
+	-webkit-transition: 0.2s;
+	transition: 0.2s;
+}
+.monkey.yellow{
+	color: yellow;
+	background-color: yellow;
+	top: 0;
+	left: 700px;
+	-webkit-transition: 2.0s;
+	transition: 2.0s;
+}
+.monkey.yellow .face:before,
+.monkey.yellow .face:after{
+	background-color: yellow;
+	-webkit-transition: 2.0s;
+	transition: 2.0s;
+}
+.monkey.white{
+	color: white;
+	background-color: white;
+	top: 715px;
+	left: 440px;
+	-webkit-transition: 0.1s;
+	transition: 0.1s;
+}
+.monkey.white .face{
+	background-color: white;
+	-webkit-transition: 0.1s;
+	transition: 0.1s;
+}
+.monkey.white .face:before,
+.monkey.white .face:after{
+	background-color: white;
+	-webkit-transition: 0.1s;
+	transition: 0.1s;
+}
+.monkey.white:hover{
+	background-color: chocolate;
+	color: chocolate;
+}
+.monkey.white:hover .face{
+	background-color: #FFEBCD;
+}
+.monkey.white:hover .face:before,
+.monkey.white:hover .face:after{
+	background-color: chocolate;
+}
+.monkey.black{
+	color: #000;
+	background-color: #000;
+	top: 1850px;
+	left: 700px;
+}
+.monkey.black .face:before,
+.monkey.black .face:after{
+	background-color: black;
+}
+.monkey.aqua{
+	color: #00ffff;
+	background-color: #00ffff;
+	top: 79px;
+	left: 500px;
+	-webkit-transition: 0.8s;
+	transition: 0.8s;
+}
+.monkey.aqua .face:before,
+.monkey.aqua .face:after{
+	background-color: aqua;
+	-webkit-transition: 0.8s;
+	transition: 0.8s;
+}
+.monkey.darkviolet{
+	color: #9400d3;
+	background-color: #9400d3;
+	top: 1510px;
+	left: 3px;
+	-webkit-transition: 5.0s;
+	transition: 5.0s;
+}
+.monkey.darkviolet .face:before,
+.monkey.darkviolet .face:after{
+	background-color: darkviolet;
+	-webkit-transition: 5.0s;
+	transition: 5.0s;
+}
+.monkey.gold{
+	color: #ffd700;
+	background-color: #ffd700;
+	top: 1600px;
+	left: 600px;
+}
+.monkey.gold .face:before,
+.monkey.gold .face:after{
+	background-color: gold;
+}
+.monkey.navy{
+	color: #000080;
+	background-color: #000080;
+	top: 1103px;
+	left: 545px;
+}
+.monkey.navy .face:before,
+.monkey.navy .face:after{
+	background-color: navy;
+}
+.monkey.mediumspringgreen{
+	color: #00fa9a;
+	background-color: #00fa9a;
+	top: 999px;
+	left: 555px;
+	-webkit-transition: 1.0s;
+	transition: 1.0s;
+}
+.monkey.mediumspringgreen .face:before,
+.monkey.mediumspringgreen .face:after{
+	background-color: mediumspringgreen;
+	-webkit-transition: 1.0s;
+	transition: 1.0s;
+}
+.monkey.whitesmoke{
+	color: #f5f5f5;
+	background-color: #f5f5f5;
+	top: 0;
+	left: 650px;
+}
+.monkey.whitesmoke .face:before,
+.monkey.whitesmoke .face:after{
+	background-color: whitesmoke;
+}
