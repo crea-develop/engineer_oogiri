@@ -1,0 +1,152 @@
+@charset 'UTF-8';
+
+body {
+    margin: 0;
+    color: #000;
+    font-family: Impact, sans-serif;
+    /*font-size: 20px;*/
+    overflow: hidden;
+    line-height: 1;
+    padding-top: 100px;
+    text-align: center;
+}
+label {
+    display: block;
+}
+input[type="checkbox"] {
+    display: none;
+}
+.button {
+    background-color: rgba(0,0,0, 0);
+    border: 1px solid #ccc;
+    cursor: pointer;
+    display: inline-block;
+    height: 58px;
+    margin-bottom: 30px;
+    position: relative;
+    text-align: center;
+    width: 198px;
+}
+.button:after {
+    color: rgba(0,0,0, 0.5);
+    content: "PLAY";
+    font-size: 16px;
+    letter-spacing: 2px;
+    line-height: 58px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all .5s;
+    width: 100%;
+}
+.button:before {
+    background-color: #eee;
+    content: "";
+    height: 100%;
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    left: 0;
+    -webkit-transform: scale(1.2,1.7);
+    transform: scale(1.2, 1.7);
+    transition: all .5s;
+    width: 100%;
+}
+.button span:before {
+    border: 6px solid transparent;
+    border-left: 12px solid #82cddd;
+    content: "";
+    height: 0;
+    left: 45px;
+    opacity: 0;
+    position: absolute;
+    top: 22px;
+    transition: all .5s;
+    width: 0;
+    z-index: 10;
+}
+.button:hover:before {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+}
+.button:hover span:before {
+    left: 55px;
+    opacity: 1;
+}
+div {
+    border-top: 1px solid #999;
+    overflow: hidden;
+    height: 800px;
+}
+ul {
+    list-style: none;
+    border-bottom: 2px solid #999;
+    position: relative;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 0;
+    -webkit-transform: rotate(8deg);
+    transform: rotate(8deg);
+    height: 500px;
+    width: 120%;
+}
+ul li {
+    bottom: 500px;
+    border-radius: 80px;
+    color: #82cddd;
+    height: 160px;
+    font-size: 28px;
+    left: 0;
+    line-height: 160px;
+    position: absolute;
+    text-align: center;
+    width: 160px;
+}
+ul li:first-child {
+    background-color: #000;
+}
+ul li:nth-child(2) {
+    background-color: #222;
+}
+ul li:nth-child(3) {
+    background-color: #444;
+}
+ul li:nth-child(4) {
+    background-color: #666;
+    color: #59c5de;
+}
+ul li:nth-child(5) {
+    background-color: #888;
+    color: #59c5de;
+}
+#button:checked + .button:before {
+    opacity: 0;
+}
+#button:checked + .button:after {
+    background-color: #82cddd;
+    color: rgba(255,255,255, 1);
+    content: "RESET";
+    -webkit-transform: rotateX(-360deg);
+    transform: rotateX(-360deg);
+}#button:checked + .button span:before {
+    border-left-color: rgba(255,255,255, 1);
+}
+#button:checked ~ div ul li:first-child {
+    animation: lidown 2s ease-in 2.5s 1 forwards;
+}
+#button:checked ~ div ul li:nth-child(2) {
+    animation: lidown 2s ease-in 2s 1 forwards;
+}
+#button:checked ~ div ul li:nth-child(3) {
+    animation: lidown 2s ease-in 1.5s 1 forwards;
+}
+#button:checked ~ div ul li:nth-child(4) {
+    animation: lidown 2s ease-in 1s 1 forwards;
+}
+#button:checked ~ div ul li:nth-child(5) {
+    animation: lidown 2s ease-in .5s 1 forwards;
+}
+
+
