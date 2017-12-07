@@ -6,30 +6,34 @@
   * JavaScriptは関数スコープ
   * グローバル変数
   * ローカル変数
-  * クロージャって？
-  * レキシカルスコープって？
+* スコープチェーンとクロージャ
+* レキシカルスコープ
 * 匿名関数
+* 即時関数
 * オブジェクト
+  * 最も単純なオブジェクト
+  * コンストラクタを使用したオブジェクトの生成
+  * もう少し複雑なオブジェクト
 * 名前空間
 * prototype
 * this
 
 ### 第2部 : 基本の応用で高度なプログラム設計をしてみる
 * モジュール
- * 一般的なお話- モジュール化するってどういうこと？
-   * 保守性を高くする
-   * 名前空間を汚染しない
-   * 再利用可能なコードにする
- * JavaScriptではどうやるの？
-   * 匿名関数を利用した隠蔽
-   * クロージャとグローバル変数を利用した名前空間の実装
-   * オブジェクトインターフェースを利用したプライベート/パブリックメンバの実装
- * 問題点
-   * 依存関係の把握
-     * CommonJS exportsとrequire
-     * AMD
-     * UMD
-     * モジュールバンドル
+  * 一般的なお話- モジュール化するってどういうこと？
+    * 保守性を高くする
+    * 名前空間を汚染しない
+    * 再利用可能なコードにする
+  * JavaScriptではどうやるの？
+    * 匿名関数を利用した隠蔽
+    * クロージャとグローバル変数を利用した名前空間の実装
+    * オブジェクトインターフェースを利用したプライベート/パブリックメンバの実装
+  * 問題点
+    * 依存関係の把握
+      * CommonJS exportsとrequire
+      * AMD
+      * UMD
+      * モジュールバンドル
 
 ### 第3部 : 新しいJavaScriptの仕様 ECMAScript5に触れてみる
 * ECMAScript 5
@@ -49,9 +53,9 @@
 
 
 
-## 解説
-### 第1部 : JavaScriptの基本をもう少し深く学んでみる
-#### 変数のスコープ
+# 解説
+## 第1部 : JavaScriptの基本をもう少し深く学んでみる
+### 変数のスコープ
   * スコープって？
 
     変数を参照できる範囲のこと。変数を宣言する場所によって参照できる範囲が変わる。
@@ -68,49 +72,141 @@
 
     スコープの中で宣言された変数のこと。スコープの中でしか参照できない。
 
-  * クロージャって？
-    
-    関数は入れ子にすることができる。  
-    スコープの外にある変数を参照できる関数のことをクロージャという。  
-    JavaScriptの場合はすべての関数はクロージャになる。  
+　  
 
-        function hogeFunc(){
-            var hoge = "hoge";
-            function hogehogeFunc(){
-                //hogehogeFuncの中ではhogeを参照できる
-                console.log(hoge);  //hogeと出力される
-                var hoge = "hogehoge";
-            }
-            //しかしhogeFuncの中ではhogehogeFuncの中の変数を参照できない
-            console.log(hoge);  //hogeになる
+### 関数の入れ子
+
+関数は入れ子にすることができる。  
+
+    function hogeFunc(){
+
+        function hogehogeFunc(){
+
         }
+    }
 
-  * レキシカルスコープって？
-
-
-　  
-
-#### 匿名関数
 
 　  
 
-#### オブジェクト
+### スコープチェーンとクロージャ
 
-  * Javascriptのオブジェクトは連想配列
+ある変数hogeを関数内で参照した時、その関数内で定義されたhogeが見つからなかった場合、外側のスコープにhogeを探しに行く。  
+そこで見つからなかった場合、さらに外側のスコープにhogeを探しに行く。  
+hogeが見つかるまで外側のスコープに探しに行く。  
+グローバルのスコープまで探しに行って見つからなかった場合はundefinedになる。  
+この仕組みをスコープチェーンと言う。  
 
-        var hoge = {}; //最も単純なオブジェクト
+    function hogeFunc(){
+        var hoge = "hoge";
+        function hogehogeFunc(){
+        	console.log(hoge);  //hogeと出力される。hogehogeFunc内に変数hogeが無いので、hogeFunc内のhogeを参照する
+        }
+    }
+    
+このようにスコープの外にある変数を参照できる関数のことをクロージャという。  
+JavaScriptの場合はすべての関数はクロージャになる。  
+
+    var globalHoge = "global";
+    //hogeFuncはグローバル変数を参照できるクロージャ
+    function hogeFunc(){
+        var hoge = "hoge";
+
+        //hogehogeFuncはスコープ外の変数hogeを参照できるクロージャ
+        function hogehogeFunc(){
+            //この中ではhogeを参照できる
+            console.log(hoge);  //hogeと出力される
+        }
+    }
+
 　  
 
-#### 名前空間
+### レキシカルスコープ
+
+スコープの外で定義されている変数と同名の変数を定義できる。  
+この場合、スコープの外にある同名の変数に影響は与えない。
+
+    function hogeFunc(){
+        var hoge = "hoge";
+
+        function hogehogeFunc(){
+        	//スコープ外の変数hogeと同名の変数hogeを定義
+            var hoge = "hogehoge";
+            console.log(hoge);  //hogehogeと出力される
+        }
+        //hogeFunc内で定義されたhogeはhogehogeFuncで定義されたhogeの影響を受けない
+        console.log(hoge);  //hogeになる
+    }
+
+　  
+
+### 匿名関数
+
+関数は名前を付けずに定義することができる。
+
+    function(){
+
+    }
+
+　  
+
+### 即時関数
+
+関数は定義すると同時に実行することができる。
+        
+    //書き方１※こちらが推奨らしい
+    (function(){
+       //この中が即実行される
+    })();
+        
+    //書き方2
+    (function(){
+        //この中が即実行される
+    }());
+
+プログラムの一連の処理の中で、一時的な変数を利用して処理をまとめたい時などに活用できる。
+
+    var hoge = (function(){
+        //この中が即実行される
+        var a = 1;
+        var b = 2;
+        return a+b; //処理をして値を返す
+    })();
+
+　  
+
+### オブジェクト
+
+Javascriptのオブジェクトは連想配列
+#### 最も単純なオブジェクト
+
+    var hoge = {};
+
+#### コンストラクタを使用したオブジェクトの生成
+
+    var hoge = new Object();
+
+#### もう少し複雑なオブジェクト
+
+    var hoge = {
+        fuga : "fuga",
+        fugafuga : "fugafuga",
+        fugafugafuga : function(a, b){
+            return a + b;
+        }
+    }
+    console.log(hoge.fugafugafuga(1,2)); //3と出力される
+　  
+
+### 名前空間
 
 変数等へのアクセスの手段。
 
 　  
 
 
-### 第2部 : 基本の応用で高度なプログラム設計をしてみる
-#### モジュール
- * 一般的なお話- モジュール化するってどういうこと？
+## 第2部 : 基本の応用で高度なプログラム設計をしてみる
+### モジュール
+#### 一般的なお話- モジュール化するってどういうこと？
    * 保守性を高くする
 
    　可能な限り自己完結していること。依存性の少ないコード。
@@ -123,8 +219,10 @@
 
    　コードの一部をコピペで何かを作って流用するのではなく、同じコードをそのまま利用できる汎用的な形にする。
 
- * JavaScriptではどうやるの？
-   * 匿名関数を利用した隠蔽
+　  
+
+#### JavaScriptではどうやるの？
+   * 即時匿名関数を利用した隠蔽
 
             (function(){
                 var hoge = "hoge";
@@ -148,22 +246,27 @@
             console.log(globalHoge.hoge); // hogeと出力される
 
    * オブジェクトインターフェースを利用したプライベート/パブリックメンバの実装
- * 問題点
+
+　  
+
+#### 問題点
    * 依存関係の把握
      * CommonJS exportsとrequire
      * AMD
      * UMD
      * モジュールバンドル
 
-#### prototype
+　  
+
+### prototype
 
 　  
 
-#### this
+### this
 
 　  
 
-### 第3部 : ECMAScript5に触れてみる
+## 第3部 : ECMAScript5に触れてみる
  * strictモード
  * getter / setter
  * Object.create
