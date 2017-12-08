@@ -18,6 +18,7 @@
 * prototype
 * 名前空間
 * this
+* apply, call
 
 
 
@@ -255,12 +256,65 @@ Javascriptのオブジェクトは連想配列
 
 ### this
 
-JavaScriptのthisは利用する場面や文脈で中身が代わる。  
+JavaScriptのthisは呼び出し方によって中身が代わる。  
 グローバルスコープでthisを参照した場合、グローバルオブジェクトが入る。  
 （ブラウザで実行している場合はwindowが入る。）
     
-    //グローバルスコープでthisを参照
     console.log(this); //thisに入っているのはwindowオブジェクト
+
+オブジェクト内でメソッドとしてthisを参照していて呼び出した場合
+    
+    var hoge = {
+    	value : 10,
+        fuga : function(){
+            return this.value;
+        }
+    }
+    console.log(hoge.fuga()); //10と出力される。この場合thisにはhogeが入る
+
+関数内でthisを参照していて関数として呼び出した場合
+
+    function hoge(){
+        this.value = 10;
+        return this.value;
+    }
+   	console.log(hoge()); //10と出力される。この場合thisにはwindowが入る。つまりvalueはグローバル変数になっている。
+
+コンストラクタ呼び出しの場合
+
+    function hoge(){
+        this.value = 10;
+        this.fuga = function(){
+            return this.value;
+        }
+    }
+    var instance = new hoge();
+    console.log(instance.fuga()); //11と出力される。この場合thisはインスタンス自身が入る。
+
+　  
+
+### apply, call
+
+thisは呼び出し方で中身が代わるが、applyとcallを使うと、呼び出した時に強制的にthisの中身を代えることができる。  
+第1引数にthisを束縛したいオブジェクトを渡す。  
+applyは第2引数に配列としてメソッドに引数を渡すことができる。  
+callは第2引数以降がそのままメソッドに引数として渡される。
+    
+    var hoge = {
+    	value : 10,
+        fuga : function(a, b){
+            return this.value + a + b;
+        }
+    }
+    var hogehoge = {
+    	value : 3
+    }
+    console.log(hoge.fuga());  //10と出力される。
+    console.log(hoge.fuga.apply(hogehoge, [1,1])); //5と出力される
+    console.log(hoge.fuga.call(hogehoge, 1,1)); //5と出力される
+
+
+  
 
 
 　  
